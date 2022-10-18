@@ -1,0 +1,2 @@
+https://github.com/alemuller/tree-sitter-make 
+https://github.com/mitchellh/tree-sitter-hcl
