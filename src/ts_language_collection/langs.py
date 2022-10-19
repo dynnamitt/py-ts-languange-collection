@@ -3,7 +3,7 @@ from . import common
 import pickle
 from pathlib import Path
 
-HERE = Path(".")
+HERE = Path(__file__).absolute().parent
 
 # DESerialization
 with open(common.lang_names_index_file(HERE), "rb") as infile:

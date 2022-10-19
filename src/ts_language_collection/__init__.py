@@ -1,2 +1,2 @@
 
-from langs import get_language,get_parser
+from .langs import get_language,get_parser
