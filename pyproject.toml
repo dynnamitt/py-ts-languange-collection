@@ -5,7 +5,7 @@ description = ""
 authors = ["kjetil midtlie <kjetil.midtlie@gmail.com>"]
 readme = "README.md"
 packages = [{include = "ts_language_collection", from = "src"}]
-include = ["src/**/*.so","src/**/*.dll","src/**/*pickle"]
+include = ["src/**/*.so","src/**/*.dll","src/**/*.pickle"]
 
 [tool.poetry.dependencies]
 python = "^3.10"
