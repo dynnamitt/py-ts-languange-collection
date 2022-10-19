@@ -2,16 +2,14 @@ import subprocess
 from pathlib import Path
 from dataclasses import dataclass
 import pickle
-import sys
 from tree_sitter import Language # external-lib
+
+import src.ts_language_collection.common as common 
 
 REPOS = Path("repos.txt")
 CLONE_DIR = Path("cloned-langs")
 SCRIPT = Path(__file__).name
-SRC = Path("src","ts_language_collection")
-lib_ext = "dll" if sys.platform == "win32" else "so"
-lib_filename = Path(SRC, f"languages.{lib_ext}")
-lang_names_path = Path(SRC,"langs_index.pickle")
+DEST = Path("src","ts_language_collection")
 
 @dataclass
 class TSLangRepo:
@@ -44,15 +42,17 @@ else:
 print()
 
 dir_paths = [Path(CLONE_DIR, r.directory()) for r in repos]
+lib_dest = common.lib_filename(DEST)
 
-print(f"{SCRIPT}: Building", lib_filename)
+print(f"{SCRIPT}: Building", lib_dest)
 
 # pass the torch
-Language.build_library( str(lib_filename), dir_paths)
+Language.build_library( str(lib_dest), dir_paths)
 
 lang_names = [r.lang_name() for r in repos]
+index_dest = common.lang_names_index_file(DEST)
 
-print(f"{SCRIPT}: Store index", lang_names_path)
-with open(lang_names_path, "wb") as outfile:
+print(f"{SCRIPT}: Store index", index_dest)
+with open(index_dest, "wb") as outfile:
  	# "wb" argument opens the file in binary mode
 	pickle.dump(lang_names, outfile)
