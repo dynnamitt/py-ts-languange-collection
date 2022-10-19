@@ -38,8 +38,7 @@ else:
         print()
         # TODO: async
         subprocess.check_call(["git", "clone", r.url], cwd=CLONE_DIR.name)
-
-print()
+    print()
 
 dir_paths = [Path(CLONE_DIR, r.directory()) for r in repos]
 lib_dest = common.lib_filename(DEST)
@@ -54,5 +53,4 @@ index_dest = common.lang_names_index_file(DEST)
 
 print(f"{SCRIPT}: Store index", index_dest)
 with open(index_dest, "wb") as outfile:
- 	# "wb" argument opens the file in binary mode
 	pickle.dump(lang_names, outfile)

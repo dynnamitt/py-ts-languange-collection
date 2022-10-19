@@ -1,13 +1,23 @@
-from tree_sitter import Language, Parser, Node, Tree
+from tree_sitter import Language, Parser
+from . import common
+import pickle
 from pathlib import Path
-from typing import List
-import sys
+
+HERE = Path(".")
+
+# DESerialization
+with open(common.lang_names_index_file(HERE), "rb") as infile:
+    lang_names = pickle.load(infile)
 
 
-def init_langs(lang_names:List[str]) -> List[Language]:
-    try:
-        langs = [Language(OUT_LIB,n) for n in lang_names]
-    except OSError as e:
-            sys.stderr.write(str(e)+"\n")
-            raise ImportError(f"Failed to find/open {OUT_LIB}")
-     
+def get_language(language):
+    assert language in lang_names, "Not a valid language option!"
+    return Language(str(common.lib_filename(HERE)), language)
+
+
+def get_parser(language):
+    language = get_language(language)
+    parser = Parser()
+    parser.set_language(language)
+    return parser
+
