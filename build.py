@@ -1,12 +1,17 @@
 import subprocess
 from pathlib import Path
 from dataclasses import dataclass
+import pickle
 import sys
-from tree_sitter import Language
+from tree_sitter import Language # external-lib
 
+REPOS = Path("repos.txt")
 CLONE_DIR = Path("cloned-langs")
 SCRIPT = Path(__file__).name
 SRC = Path("src","ts_language_collection")
+lib_ext = "dll" if sys.platform == "win32" else "so"
+lib_filename = Path(SRC, f"languages.{lib_ext}")
+lang_names_path = Path(SRC,"langs_index.pickle")
 
 @dataclass
 class TSLangRepo:
@@ -18,11 +23,8 @@ class TSLangRepo:
     def lang_name(self) -> str:
         return self.directory().name.split("-")[-1]
 
-with open("repos.txt", "r") as file:
+with open(REPOS, "r") as file:
     repos = [TSLangRepo(url.rstrip()) for url in file]
-
-# clone_directory = os.path.join("vendor", url.rstrip("/").split("/")[-1])
-# repos.append((url, commit, clone_directory))
 
 # During the build, this script runs several times, and only needs to download
 # repositories on first time.
@@ -41,11 +43,16 @@ else:
 
 print()
 
-if sys.platform == "win32":
-    languages_filename = f"{SRC}\\languages.dll"
-else:
-    languages_filename = f"{SRC}/languages.so"
+dir_paths = [Path(CLONE_DIR, r.directory()) for r in repos]
 
-print(f"{SCRIPT}: Building", languages_filename)
+print(f"{SCRIPT}: Building", lib_filename)
 
-Language.build_library( languages_filename, [Path(CLONE_DIR,r.directory()) for r in repos])
+# pass the torch
+Language.build_library( str(lib_filename), dir_paths)
+
+lang_names = [r.lang_name() for r in repos]
+
+print(f"{SCRIPT}: Store index", lang_names_path)
+with open(lang_names_path, "wb") as outfile:
+ 	# "wb" argument opens the file in binary mode
+	pickle.dump(lang_names, outfile)
