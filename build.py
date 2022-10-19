@@ -4,7 +4,7 @@ from dataclasses import dataclass
 import pickle
 from tree_sitter import Language # external-lib
 
-import src.ts_language_collection.common as common 
+import src.common as common
 
 REPOS = Path("repos.txt")
 CLONE_DIR = Path("cloned-langs")
