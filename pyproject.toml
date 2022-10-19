@@ -4,7 +4,8 @@ version = "0.1.0"
 description = "A thin wrapper ontop of py-tree-sitter, has a selected few laguages embedded"
 authors = ["kjetil midtlie <kjetil.midtlie@gmail.com>"]
 readme = "README.md"
-packages = [{include = "ts_language_collection", from = "src"}]
+packages = [{include = "ts_language_collection", from = "src"},
+    {include = "common", from = "src"}]
 include = ["src/**/*.so","src/**/*.dll","src/**/*.pickle"]
 keywords = ["tree-sitter", "parsing","languages"]
 

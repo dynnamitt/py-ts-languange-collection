@@ -1,5 +1,5 @@
 from tree_sitter import Language, Parser
-from .. import common
+import common
 import pickle
 from pathlib import Path
 
