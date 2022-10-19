@@ -1,18 +1,24 @@
 [tool.poetry]
 name = "ts-language-collection"
 version = "0.1.0"
-description = ""
+description = "A thin wrapper ontop of py-tree-sitter, has a selected few laguages embedded"
 authors = ["kjetil midtlie <kjetil.midtlie@gmail.com>"]
 readme = "README.md"
 packages = [{include = "ts_language_collection", from = "src"}]
 include = ["src/**/*.so","src/**/*.dll","src/**/*.pickle"]
+keywords = ["tree-sitter", "parsing","languages"]
+
 
 [tool.poetry.dependencies]
 python = "^3.10"
 tree-sitter = "^0.20.1"
 
 
+[tool.poetry.build]
+generate-setup-file = false
+script = "build.py"
+
 
 [build-system]
-requires = ["poetry-core"]
+requires = ["poetry-core", "tree-sitter>=0.20.1"]
 build-backend = "poetry.core.masonry.api"
