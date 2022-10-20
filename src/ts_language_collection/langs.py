@@ -5,7 +5,7 @@ from pathlib import Path
 
 HERE = Path(__file__).absolute().parent
 lib_ext = ".dll" if sys.platform == "win32" else ".so"
-LIB_FILE = Path(HERE,"languages{lib_ext}")
+LIB_FILE = Path(HERE,f"languages{lib_ext}")
 INDEX_FILE = Path(HERE,"index.pickle")
 
 # DESerialization
