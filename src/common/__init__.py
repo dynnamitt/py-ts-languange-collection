@@ -1,1 +1,0 @@
-from .path_resolve import lib_filename,lang_names_index_file

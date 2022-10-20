@@ -1,5 +1,6 @@
 cloned-langs/
 *.so
+*.dll
 *.pickle
 __pycache__
 dist/
