@@ -1,4 +1,4 @@
-# PyPi lib, wheel-bundling of "some" Tree-sitter parsers
+# Py lib, wheel-bundling of "some" Tree-sitter parsers
 
 See repos.txt for definition of "some"
 
