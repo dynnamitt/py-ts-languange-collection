@@ -10,7 +10,7 @@ keywords = ["tree-sitter", "parsing","languages"]
 
 
 [tool.poetry.dependencies]
-python = "^3.10"
+python = "^3.8"
 tree-sitter = "^0.20.1"
 
 [tool.poetry.build]

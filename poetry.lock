@@ -8,8 +8,8 @@ python-versions = ">=3.3"
 
 [metadata]
 lock-version = "1.1"
-python-versions = "^3.10"
-content-hash = "167348fa95abcb40174e196d9f2a5e96ececfa5c4d1ab96b10e4be175fc4e2f4"
+python-versions = "^3.8"
+content-hash = "fb9f05fad5b85e4ec12539e4f98eeb85403781f33aed8238d690e0d88a06ed5d"
 
 [metadata.files]
 tree-sitter = [
